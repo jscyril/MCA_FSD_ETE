@@ -26,7 +26,6 @@ db.connect((err) => {
   console.log("Connected to the database.");
 });
 
-// Get all movies
 app.get("/movies", (req, res) => {
   db.query("SELECT * FROM movies", (err, results) => {
     if (err) return res.status(500).send(err);
@@ -34,7 +33,6 @@ app.get("/movies", (req, res) => {
   });
 });
 
-// Add a new movie
 app.post("/movies", (req, res) => {
   console.log("POST /movies req.body:", req.body);
   if (!req.body || typeof req.body !== "object") {
@@ -54,7 +52,6 @@ app.post("/movies", (req, res) => {
   );
 });
 
-// Update an existing movie
 app.put("/movies/:id", (req, res) => {
   db.query(
     "UPDATE movies SET ? WHERE id=?",
@@ -66,7 +63,6 @@ app.put("/movies/:id", (req, res) => {
   );
 });
 
-// Delete a movie
 app.delete("/movies/:id", (req, res) => {
   db.query("DELETE FROM movies WHERE id=?", [req.params.id], (err) => {
     if (err) return res.status(500).send(err);
